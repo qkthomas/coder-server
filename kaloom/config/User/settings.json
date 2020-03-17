@@ -1,0 +1,54 @@
+{
+    "editor.renderWhitespace": "all",
+    "files.autoSave": "off",
+    "window.zoomLevel": -4,
+    "go.lintTool": "golangci-lint",
+    "go.lintFlags": [
+        "--fast"
+    ],
+    "go.inferGopath": true,
+    "go.lintOnSave": "file",
+    "go.formatTool": "gofmt",
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
+    },
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.closeOnFileDelete": false,
+    "breadcrumbs.enabled": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "python.dataScience.searchForJupyter": false,
+    "files.maxMemoryForLargeFilesMB": 8192,
+    "cSpell.userWords": [
+        "subs"
+    ],
+    "gitlens.defaultDateStyle": "absolute",
+    "go.buildOnSave": "off",
+    "java.configuration.checkProjectSettingsExclusions": false,
+    "editor.largeFileOptimizations": true,
+    "search.usePCRE2": true,
+    "git.autofetch": false,
+    "go.useLanguageServer": true,
+    "[go]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+        },
+        // Optional: Disable snippets, as they conflict with completion ranking.
+        "editor.snippetSuggestions": "none",
+    },
+    "[go.mod]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+        },
+    },
+    "gopls": {
+        "usePlaceholders": true,
+        "completeUnimported": true,
+        // Add parameter placeholders when completing a function.
+        "usePlaceholders": true,
+        // If true, enable additional analyses with staticcheck.
+        // Warning: This will significantly increase memory usage.
+        "staticcheck": false,
+    },
+}

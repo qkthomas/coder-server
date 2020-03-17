@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  code-server:
+    build: ./src
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - "$GOSRC:/home/coder/project/go/src"
+      - "./config:$USERDATADIR"
+      # - "./.local/share/code-server:/home/coder/.local/share/code-server"
+      # - "./bin:/home/coder/bin"
+    environment:
+      PASSWORD: "123"
+      USERDATADIR: "$USERDATADIR"
+      # SERVICE_URL: "https://marketplace.visualstudio.com/_apis/public/gallery"
+      # PATH: "/home/coder/bin/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
