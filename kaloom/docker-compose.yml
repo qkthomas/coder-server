@@ -7,7 +7,15 @@ services:
       - "127.0.0.1:8080:8080"
     volumes:
       - "$GOSRC:/home/coder/project/go/src"
-      - "./config:$USERDATADIR"
+      - "config:$USERDATADIR"
     environment:
       PASSWORD: "123"
       USERDATADIR: "$USERDATADIR"
+
+volumes:
+  config:
+    driver: local
+    driver_opts:
+      type: none
+      device: $PWD/config
+      o: bind
