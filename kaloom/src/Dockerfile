@@ -7,7 +7,7 @@ RUN go get -u github.com/go-delve/delve/cmd/dlv
 RUN GO111MODULE=on go get golang.org/x/tools/gopls@latest
 
 # stage coder-server
-FROM codercom/code-server:3.0.1
+FROM codercom/code-server:latest
 
 ARG the_home=/home/coder
 ARG ext_dir=${the_home}/.local/share/code-server/extensions/
