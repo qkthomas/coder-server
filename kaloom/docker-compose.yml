@@ -8,9 +8,16 @@ services:
     volumes:
       - "$HOME/$GOSRC:/home/coder/project/go/src"
       - "config:$USERDATADIR"
+      - "./coder-ssh:/home/coder/.ssh"
+      - "./coder-home-shared/.bashrc:/home/coder/.bashrc"
+      - "./coder-home-shared/.bashrc:/home/coder/.profile"
     environment:
       PASSWORD: "123"
       USERDATADIR: "$USERDATADIR"
+    networks:
+      code_server_nw:
+        aliases:
+          - code_server_nw_ext
 
 volumes:
   config:
@@ -19,3 +26,10 @@ volumes:
       type: none
       device: $PWD/config
       o: bind
+
+networks:
+  code_server_nw:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.167.100.0/24
