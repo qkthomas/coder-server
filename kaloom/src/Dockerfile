@@ -43,8 +43,9 @@ RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/i
 # update apt
 RUN sudo apt update
 
-# install build-essential for pcap
+# install build-essential and pcap headers
 RUN sudo apt -y install build-essential
+RUN sudo apt-get install libpcap-dev
 
 # install python2&3
 RUN sudo apt -y install python python-dev python-pip python3 python3-dev python3-pip
