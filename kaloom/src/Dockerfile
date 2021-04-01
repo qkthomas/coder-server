@@ -44,8 +44,7 @@ RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/i
 RUN sudo apt update
 
 # install build-essential and pcap headers
-RUN sudo apt -y install build-essential
-RUN sudo apt-get install libpcap-dev
+RUN sudo apt -y install build-essential libpcap-dev
 
 # install python2&3
 RUN sudo apt -y install python python-dev python-pip python3 python3-dev python3-pip
@@ -53,6 +52,13 @@ RUN sudo apt -y install python python-dev python-pip python3 python3-dev python3
 # install pylint
 RUN pip install pylint
 RUN pip3 install pylint
+
+# install nodejs and its package manager
+RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+RUN sudo apt-get install -y nodejs
+
+# install bash language server
+RUN sudo npm i -g bash-language-server
 
 # update path
 ARG dot_local_bin=${the_home}/.local/bin

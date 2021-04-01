@@ -7,6 +7,7 @@ services:
       - "127.0.0.1:8080:8080"
     volumes:
       - "$HOME/$GOSRC:/home/coder/project/go/src"
+      - "$HOME/$SAVEDWORKSPACE:/home/coder/saved_workspaces"
       - "config:$USERDATADIR"
       - "./coder-ssh:/home/coder/.ssh"
       - "./coder-home-shared/.bashrc:/home/coder/.bashrc"
