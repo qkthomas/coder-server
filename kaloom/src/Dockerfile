@@ -2,9 +2,9 @@
 FROM golang:latest as golang
 
 # go get debugger
-RUN go get -u github.com/go-delve/delve/cmd/dlv
+RUN go install github.com/go-delve/delve/cmd/dlv@latest
 # go get language server
-RUN GO111MODULE=on go get golang.org/x/tools/gopls@latest
+RUN go install golang.org/x/tools/gopls@latest
 
 # stage coder-server
 FROM codercom/code-server:latest
@@ -38,7 +38,8 @@ COPY --from=golang ${sys_go_dir} ${sys_go_dir}
 COPY --chown=coder:coder --from=golang /go/bin ${gobin_dir}
 
 # install go linter
-RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b ${gobin_dir} v1.24.0
+ARG linter_version='v1.41.1'
+RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b ${gobin_dir} ${linter_version}
 
 # update apt
 RUN sudo apt update
@@ -47,14 +48,18 @@ RUN sudo apt update
 RUN sudo apt -y install build-essential libpcap-dev
 
 # install python2&3
-RUN sudo apt -y install python python-dev python-pip python3 python3-dev python3-pip
+RUN sudo apt -y install python python-dev python3 python3-dev python3-pip
+
+# install pip2
+RUN curl -OJ https://bootstrap.pypa.io/pip/2.7/get-pip.py
+RUN python2 get-pip.py
 
 # install pylint
 RUN pip install pylint
 RUN pip3 install pylint
 
 # install nodejs and its package manager
-RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 RUN sudo apt-get install -y nodejs
 
 # install bash language server
