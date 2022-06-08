@@ -10,25 +10,12 @@ RUN go install golang.org/x/tools/gopls@latest
 FROM codercom/code-server:latest
 
 ARG the_home=/home/coder
-ARG ext_dir=${the_home}/.local/share/code-server/extensions/
 ARG project_dir=${the_home}/project
 ARG the_gopath=${project_dir}/go
 ARG gobin_dir=${the_gopath}/bin
 ARG sys_go_dir=/usr/local/go
 ARG sys_go_bin_dir=${sys_go_dir}/bin
 ARG sys_local_bin=/usr/local/bin/
-
-# VSCode extensions
-RUN mkdir -p ${ext_dir}
-ENV SERVICE_URL https://marketplace.visualstudio.com/_apis/public/gallery
-# RUN code-server  --install-extension eamodio.gitlens \
-#     && code-server --install-extension ms-vscode.Go \
-#     && code-server --install-extension ms-azuretools.vscode-docker \
-#     # && code-server --install-extension ms-python.python \
-#     && code-server --install-extension shakram02.bash-beautify \
-#     # && code-server --install-extension mads-hartmann.bash-ide-vscode \
-#     # && code-server --install-extension rust-lang.rust \
-#     && code-server --install-extension redhat.vscode-yaml
 
 # move go bin from golang stage
 RUN mkdir -p ${gobin_dir}
@@ -57,6 +44,10 @@ RUN python2 get-pip.py
 # install pylint
 RUN pip install pylint
 RUN pip3 install pylint
+
+# install yaml
+RUN pip install pyyaml
+RUN pip3 install pyyaml
 
 # install nodejs and its package manager
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
